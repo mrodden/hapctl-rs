@@ -1,0 +1,20 @@
+[package]
+name = "hapctl"
+version = "0.1.0"
+authors = ["Mathew Odden <mathewrodden@gmail.com>"]
+edition = "2018"
+
+[[bin]]
+name = "iamtoken"
+path = "src/iam.rs"
+
+[dependencies]
+clap = { version = "3.1.6" , features = ["cargo"] }
+tokio = { version = "1", features = ["rt"] }
+reqwest = { version = "0.11.10", features = ["blocking"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+url = "2.2"
+
+tracing = "0.1"
+tracing-subscriber = "0.2"
