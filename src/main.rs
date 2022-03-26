@@ -1,4 +1,3 @@
-
 use clap::{arg, command, Command};
 use tracing_subscriber;
 
@@ -37,16 +36,28 @@ fn main() {
             let name = sub_matches.value_of("SERVERNAME").unwrap();
             let client = hapctl::Client::new(name, endpoint);
 
-            println!("{}", client.get_weight(&name).unwrap_or_else(|c| c.to_string()));
-        },
+            println!(
+                "{}",
+                client.get_weight(&name).unwrap_or_else(|c| c.to_string())
+            );
+        }
         Some(("set-weight", sub_matches)) => {
             let name = sub_matches.value_of("SERVERNAME").unwrap();
-            let weight = sub_matches.value_of("WEIGHT").unwrap().parse::<u32>().unwrap();
+            let weight = sub_matches
+                .value_of("WEIGHT")
+                .unwrap()
+                .parse::<u32>()
+                .unwrap();
             let reason = sub_matches.value_of("REASON").unwrap();
             let client = hapctl::Client::new(name, endpoint);
 
-            println!("{}", client.set_weight(&name, weight, &reason).unwrap_or_else(|c| c.to_string()));
-        },
+            println!(
+                "{}",
+                client
+                    .set_weight(&name, weight, &reason)
+                    .unwrap_or_else(|c| c.to_string())
+            );
+        }
         _ => unreachable!("No subcommand found"),
     }
 }
